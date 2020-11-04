@@ -5,11 +5,11 @@ import json
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/hello/<name>', methods=['GET'])
+@app.route('/hello/<name>')
 def hello(name):
     obj = {
         'text': 'Hello, {}'.format(name),
