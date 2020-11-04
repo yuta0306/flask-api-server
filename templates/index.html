@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlaskでAPIサーバー化してみた！</title>
+</head>
+<body>
+    <h1>FlaskでAPIサーバー化してみた！</h1>
+    <input type="text" id="name">
+    <input type="button" value="request" class="request">
+    <p class="output"></p>
+    <script>
+        let url = "http://127.0.0.1:5000/hello"
+        let target = '山田太郎';
+        let button = document.getElementsByClassName('request')[0];
+        let name = document.getElementById('name');
+        let p = document.getElementsByClassName('output')[0];
+        name.value = target;
+
+        let request = (target) => {fetch(url + '/' + target)
+                .then(
+                    res => res.json()
+                ).then(data => {
+                        result = JSON.parse(data);
+                        p.innerHTML = result.text;
+                    }
+                )}
+        button.addEventListener('click', e => {
+            request(target);
+        });
+        name.addEventListener('change', e => {
+            target = name.value;
+        });
+    </script>
+</body>
+</html>
